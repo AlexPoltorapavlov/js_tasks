@@ -19,14 +19,14 @@ function addOperation (userName, amount) {
     userOperations[userName] = 0; 
   }
   userOperations[userName] += amount;
-  return `${userName} совершает операцию на ${amount} - возвращаем ${userOperations[userName]}`;
+  return userOperations[userName];
 }
 
 function getSum(userName) {
   if (!userOperations[userName]) {
-    return `Запрашиваем сумму операций по ${userOperations[userName]} - получаем 0`;
+    return userOperations[userName];
   }
-  return `Запрашиваем сумму операций по ${userName} - получаем ${userOperations[userName]}`;
+  return userOperations[userName];
 }
 
 console.log(addOperation('Иван', 100));
