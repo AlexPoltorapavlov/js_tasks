@@ -25,36 +25,19 @@ let bond = {
 }
 
 /* 
-Подходящая формула из интернета (Yeld to Maturity): 
-YTM = [(C + (N - P) / t) / ((N + P) / 2)] * 100%
-N = номинал облигации
-C = сумма выплат по купонам за год (размер купона * частоту выплат в год)
-P = текущая рыночная цена
-t = срок до погашения облигации в годах
+YTM = ((номинал - полная цена покупки + все купоны за период) * 12) / (полная цена покупки * время до погашения)
+
+YTM = ((nominal - price + (coupon * frequencyOfPayments * repayment/12))*12) / (price * repayment) 
 */
 
-function couponAnnualCounting (coupon, frequencyOfPayments) {
-  return coupon * frequencyOfPayments;
+function allCouponsPerPerionCounting(coupon, frequencyOfPayments, repayment) {
+  return coupon * frequencyOfPayments * repayment / 12;
 }
 
-// Среднегодовой доход по облигации (C + (N - P) / t))
-function averengeAnnualYeldCounting(couponAnnual, nominal, price, time) {
-  return (couponAnnual + (nominal - price)) / time;
-}
+function ytm (bond, price) {
+  let allCouponsPerPerion = allCouponsPerPerionCounting(bond["coupon"], bond["frequencyOfPayments"], bond["repayment"]);
 
-// Средняя стоимость облигации
-function averengeValueOfBondCounting(nominal, price) {
-  return ((nominal + price) / 2);
-}
-
-// C
-function ytm(bond, price) {
-  let time = bond["repayment"] / 12;
-  let couponAnnual = couponAnnualCounting(bond["coupon"], bond["frequencyOfPayments"]);
-  let averengeAnnualYeld = averengeAnnualYeldCounting(couponAnnual, bond["nominal"], price, time);
-  let averengeValueOfBond = averengeValueOfBondCounting(bond["nominal"], price);
-
-  return averengeAnnualYeld / averengeValueOfBond * 100 + "%";
+  return (((bond["nominal"] - price + allCouponsPerPerion)*12) / (price * bond["repayment"])).toFixed(2) + "%";
 }
 
 console.log(ytm(bond, 900))
