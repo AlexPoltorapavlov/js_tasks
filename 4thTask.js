@@ -35,9 +35,9 @@ function allCouponsPerPerionCounting(coupon, frequencyOfPayments, repayment) {
 }
 
 function ytm (bond, price) {
-  let allCouponsPerPerion = allCouponsPerPerionCounting(bond["coupon"], bond["frequencyOfPayments"], bond["repayment"]);
+  let allCouponsPerPerion = allCouponsPerPerionCounting(bond.coupon, bond.frequencyOfPayments, bond.repayment);
 
-  return (((bond["nominal"] - price + allCouponsPerPerion)*12) / (price * bond["repayment"])).toFixed(2) + "%";
+  return ((((bond.nominal - price + allCouponsPerPerion)*12) / (price * bond.repayment))*100).toFixed(2) + "%";
 }
 
 console.log(ytm(bond, 900))
