@@ -11,9 +11,9 @@ const HSLToHex = require('./colorFuncs');
 function hslToHex(color) {
   const hsl = color.match(/(\d+),\s*(\d+)%?,\s*(\d+)%?/);
 
-  const h = parseInt(hsl[1], 10);
-  const s = parseInt(hsl[2], 10);
-  const l = parseInt(hsl[3], 10);
+  const h = +hsl[1];
+  const s = +hsl[2];
+  const l = +hsl[3];
 
   return HSLToHex(h, s, l);
 }
