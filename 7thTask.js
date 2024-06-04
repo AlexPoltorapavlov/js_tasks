@@ -15,25 +15,7 @@
 пока запущен один таймер, второй запустить нельзя, вывести какую нибудь ошибку в лог.
 */
 
-/*
  
-Как проверить код:
-
-// Инициализация и запуск таймера
-timer = new Timer();
-timer.start(10);
-
-// Проверка повторного запуска таймера спустя 3 секунды после запуска кода
-setTimeout(() => {
-  timer.start(10);
-}, 3000);
-
-// Сброс таймера спустя 7 секунд после запуска кода
-setTimeout(() => {
-  timer.reset()
-}, 7000);
-
-*/
 
 class Timer {
   constructor() {
@@ -66,7 +48,6 @@ class Timer {
 
   stop() {
     if (this.timerId !== null) {
-      clearInterval(this.timerId); 
       this.isRunning = false;
       clearInterval(this.timerId);
     }
@@ -79,4 +60,20 @@ class Timer {
     console.log("Таймер сброшен!");
   }
 }
+
+// Как проверить код:
+
+// Инициализация и запуск таймера
+timer = new Timer();
+timer.start(10);
+
+// Проверка повторного запуска таймера спустя 3 секунды после запуска кода
+setTimeout(() => {
+  timer.start(10);
+}, 3000);
+
+// Сброс таймера спустя 7 секунд после запуска кода
+//setTimeout(() => {
+//  timer.reset()
+//}, 7000);
 
